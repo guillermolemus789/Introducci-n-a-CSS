@@ -1035,7 +1035,98 @@ a {
     100% { box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); }
 }
 
+/* 10. Métricas de Amenazas (Media Queries Demo) */
+.metrics-section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* VISTA DE ESCRITORIO: 4 tarjetas en una sola fila (4 columnas) */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.metric-card {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.metric-card:hover::before {
+    opacity: 1;
+}
+
+.metric-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.metric-label {
+    font-size: 1.1rem;
+    font-family: var(--font-mono);
+    margin-bottom: 0.3rem;
+    color: #fff;
+}
+
+.metric-detail {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.metric-bar {
+    width: 100%;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.metric-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1.5s ease-in-out;
+}
+
+.bar-green { background-color: var(--neon-green); box-shadow: 0 0 8px var(--neon-green-glow); }
+.bar-cyan  { background-color: var(--cyan); box-shadow: 0 0 8px var(--cyan-glow); }
+.bar-purple { background-color: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
+.bar-red   { background-color: #ff0055; box-shadow: 0 0 8px rgba(255, 0, 85, 0.4); }
+
 /* Diseño Responsivo */
+/* =====================================================
+   MEDIA QUERY: TABLET (≤900px)
+   ===================================================== */
 @media (max-width: 900px) {
     .info-layout, .info-layout.reverse {
         flex-direction: column;
@@ -1045,8 +1136,24 @@ a {
     .info-visual {
         min-height: 250px;
     }
+
+    /* MÉTRICAS: Reacomoda las tarjetas en cuadrícula 2x2 (2 columnas) */
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Reduce tamaño de los valores/títulos de la sección */
+    .metric-value {
+        font-size: 2.2rem;
+    }
+    .metric-label {
+        font-size: 0.95rem;
+    }
 }
 
+/* =====================================================
+   MEDIA QUERY: MÓVIL (≤768px)
+   ===================================================== */
 @media (max-width: 768px) {
     .header-container {
         flex-direction: column;
@@ -1070,5 +1177,27 @@ a {
     
     .card, .tool-card {
         padding: 2rem 1.5rem;
+    }
+}
+
+/* =====================================================
+   MEDIA QUERY: CELULAR PEQUEÑO (≤480px)
+   ===================================================== */
+@media (max-width: 480px) {
+    /* MÉTRICAS: Apila las 4 tarjetas en 1 sola columna */
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reduce el padding de toda la sección */
+    .metrics-section {
+        padding: 3rem 1rem;
+    }
+
+    .metric-value {
+        font-size: 1.8rem;
+    }
+    .metric-label {
+        font-size: 0.85rem;
     }
 }

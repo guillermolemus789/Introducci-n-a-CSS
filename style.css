@@ -134,6 +134,7 @@ a {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1.2rem 2rem;
+    position: relative; /* Contexto para el menú desplegable */
 }
 
 .logo {
@@ -142,15 +143,81 @@ a {
     font-weight: 700;
     letter-spacing: -0.5px;
     transition: text-shadow 0.3s ease;
+    z-index: 1002;
 }
 
 .logo:hover {
     text-shadow: 0 0 15px var(--neon-green-glow);
 }
 
-.nav {
+/* --- Checkbox oculto (controla el menú sin JS) --- */
+.menu-checkbox {
+    display: none; /* Oculto visualmente, solo funcional */
+}
+
+/* --- Botón Hamburguesa (3 líneas) --- */
+.menu-btn {
     display: flex;
-    gap: 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1002;
+    padding: 2px;
+}
+
+.menu-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--neon-green);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px var(--neon-green-glow);
+}
+
+/* Animación del hamburguesa → X cuando está activo */
+.menu-checkbox:checked ~ .menu-btn .menu-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-checkbox:checked ~ .menu-btn .menu-line:nth-child(2) {
+    opacity: 0;
+}
+.menu-checkbox:checked ~ .menu-btn .menu-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* --- Menú Desplegable (oculto por defecto) --- */
+.nav {
+    position: absolute;
+    top: 100%; /* Se despliega justo debajo del header */
+    left: 0;
+    width: 100%;
+    background-color: rgba(10, 10, 12, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 255, 102, 0.15);
+    
+    display: flex;
+    flex-direction: column; /* Enlaces apilados en columna */
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    
+    /* Estado oculto con transición suave */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.4s ease;
+}
+
+/* Estado visible cuando el checkbox está marcado */
+.menu-checkbox:checked ~ .nav {
+    max-height: 600px;
+    opacity: 1;
+    padding: 1rem 0;
 }
 
 .nav-link {
@@ -158,13 +225,16 @@ a {
     font-weight: 600;
     font-family: var(--font-mono);
     color: var(--text-muted);
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
     position: relative;
+    padding: 0.8rem 2rem;
+    width: 100%;
+    text-align: center;
 }
 
 .nav-link:hover {
-    color: var(--text-main);
-    transform: translateY(-2px);
+    color: var(--neon-green);
+    background-color: rgba(0, 255, 102, 0.05);
 }
 
 /* Efecto hover subrayado animado */
@@ -173,15 +243,16 @@ a {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -4px;
-    left: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--neon-green);
     transition: width 0.3s ease;
     box-shadow: 0 0 8px var(--neon-green-glow);
 }
 
 .nav-link:hover::after {
-    width: 100%;
+    width: 40%;
 }
 
 /* 2. Hero Section */
@@ -1123,7 +1194,304 @@ a {
 .bar-purple { background-color: var(--purple); box-shadow: 0 0 8px var(--purple-glow); }
 .bar-red   { background-color: #ff0055; box-shadow: 0 0 8px rgba(255, 0, 85, 0.4); }
 
-/* Diseño Responsivo */
+/* =====================================================
+   11. Centro de Comando SOC (CSS Grid Avanzado)
+   ===================================================== */
+
+/* Contenedor de la sección */
+.soc-section {
+    padding: 6rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* ----- CONTENEDOR GRID PRINCIPAL (display: grid) ----- */
+/* Se definen áreas nombradas para un layout asimétrico tipo "Bento Box" / Dashboard.
+   El mapa de calor ocupa 2 columnas y 2 filas.
+   El tráfico de red ocupa 2 columnas en la parte inferior.
+   Los demás paneles ocupan 1 celda cada uno. */
+.soc-grid {
+    display: grid; /* Propiedad explícita requerida */
+    
+    /* grid-template-columns: Define 4 columnas iguales en escritorio */
+    grid-template-columns: repeat(4, 1fr);
+    
+    /* grid-template-rows: Filas automáticas con un mínimo de 200px */
+    grid-template-rows: auto;
+    
+    /* grid-template-areas: Nombra cada celda del grid para posicionar los paneles */
+    grid-template-areas:
+        "heatmap  heatmap   alerts   nodes"
+        "heatmap  heatmap   os       firewall"
+        "traffic  traffic   traffic  traffic";
+    
+    /* gap: Espacio entre celdas del grid */
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+/* ----- ASIGNACIÓN DE ÁREAS A LOS PANELES ----- */
+/* Cada panel se asigna a un área nombrada del grid */
+.panel-heatmap  { grid-area: heatmap; }   /* Ocupa 2 columnas x 2 filas */
+.panel-traffic  { grid-area: traffic; }   /* Ocupa 4 columnas (fila completa) */
+.panel-alerts   { grid-area: alerts; }    /* 1 celda */
+.panel-nodes    { grid-area: nodes; }     /* 1 celda */
+.panel-os       { grid-area: os; }        /* 1 celda */
+.panel-firewall { grid-area: firewall; }  /* 1 celda */
+
+/* ----- ESTILO BASE DE CADA PANEL ----- */
+.soc-panel {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* Efecto hover común para todos los paneles */
+.soc-panel:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Cabecera de cada panel (punto de estado + título) */
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.panel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.dot-red    { background-color: #ff0055; box-shadow: 0 0 6px rgba(255, 0, 85, 0.6); }
+.dot-green  { background-color: var(--neon-green); box-shadow: 0 0 6px var(--neon-green-glow); }
+.dot-cyan   { background-color: var(--cyan); box-shadow: 0 0 6px var(--cyan-glow); }
+.dot-purple { background-color: var(--purple); box-shadow: 0 0 6px var(--purple-glow); }
+
+.panel-title {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.panel-footer-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+}
+
+/* ----- WIDGET: Mapa de Calor ----- */
+.heatmap-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.heatmap-row {
+    display: flex;
+    gap: 4px;
+}
+
+.hm-cell {
+    flex: 1;
+    height: 40px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Colores del mapa de calor según nivel de amenaza */
+.c-low  { background-color: rgba(0, 255, 102, 0.15); }
+.c-mid  { background-color: rgba(0, 240, 255, 0.25); }
+.c-high { background-color: rgba(255, 189, 46, 0.4); }
+.c-crit { background-color: rgba(255, 0, 85, 0.5); animation: pulseGlowRed 3s infinite; }
+
+.hm-cell:hover {
+    transform: scale(1.1);
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* ----- WIDGET: Tráfico de Red ----- */
+.traffic-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.traffic-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.traffic-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    width: 55px;
+    flex-shrink: 0;
+}
+
+.traffic-bar {
+    flex: 1;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.traffic-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.fill-cyan   { background-color: var(--cyan); box-shadow: 0 0 6px var(--cyan-glow); }
+.fill-green  { background-color: var(--neon-green); box-shadow: 0 0 6px var(--neon-green-glow); }
+.fill-purple { background-color: var(--purple); box-shadow: 0 0 6px var(--purple-glow); }
+.fill-red    { background-color: #ff0055; box-shadow: 0 0 6px rgba(255,0,85,0.4); }
+
+.traffic-pct {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: #fff;
+    width: 40px;
+    text-align: right;
+}
+
+/* ----- WIDGET: Alertas Críticas ----- */
+.alert-list {
+    list-style: none;
+}
+
+.alert-item {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+}
+
+.alert-tag {
+    display: inline-block;
+    background-color: #ff0055;
+    color: #fff;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+.tag-warn { background-color: #ffbd2e; color: #000; }
+.tag-info { background-color: var(--cyan); color: #000; }
+
+/* ----- WIDGET: Estado de Nodos ----- */
+.nodes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+}
+
+.node {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.node-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.node.online .node-dot  { background-color: var(--neon-green); box-shadow: 0 0 6px var(--neon-green-glow); }
+.node.online            { color: var(--neon-green); }
+.node.warning .node-dot { background-color: #ffbd2e; box-shadow: 0 0 6px rgba(255,189,46,0.4); }
+.node.warning           { color: #ffbd2e; }
+.node.offline .node-dot { background-color: #ff0055; box-shadow: 0 0 6px rgba(255,0,85,0.4); }
+.node.offline           { color: #ff0055; }
+
+/* ----- WIDGET: SO Detectados ----- */
+.os-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.os-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.os-name {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.os-pct {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* ----- WIDGET: Firewall Log ----- */
+.fw-log {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.fw-line {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.fw-time {
+    color: var(--text-muted);
+    opacity: 0.6;
+    margin-right: 0.5rem;
+}
+
+.fw-allow {
+    color: var(--neon-green);
+    font-weight: bold;
+}
+
+.fw-deny {
+    color: #ff0055;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   DISEÑO RESPONSIVO (Media Queries)
+   ===================================================== */
+
 /* =====================================================
    MEDIA QUERY: TABLET (≤900px)
    ===================================================== */
@@ -1148,6 +1516,17 @@ a {
     }
     .metric-label {
         font-size: 0.95rem;
+    }
+
+    /* SOC GRID TABLET: Reestructura a 2 columnas */
+    .soc-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablet */
+        grid-template-areas:
+            "heatmap  heatmap"
+            "heatmap  heatmap"
+            "alerts   nodes"
+            "os       firewall"
+            "traffic  traffic";
     }
 }
 
@@ -1199,5 +1578,22 @@ a {
     }
     .metric-label {
         font-size: 0.85rem;
+    }
+
+    /* SOC GRID MÓVIL: Colapsa a 1 sola columna */
+    .soc-grid {
+        grid-template-columns: 1fr; /* 1 columna en móvil */
+        grid-template-areas:
+            "heatmap"
+            "alerts"
+            "nodes"
+            "traffic"
+            "os"
+            "firewall";
+    }
+
+    /* Reduce padding de la sección SOC */
+    .soc-section {
+        padding: 3rem 1rem;
     }
 }

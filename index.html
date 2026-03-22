@@ -14,6 +14,15 @@
     <header class="header">
         <div class="header-container">
             <a href="#" class="logo">Cyber<span class="neon-text">Shield</span></a>
+            <!-- Checkbox oculto que controla el menú (sin JavaScript) -->
+            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+            <!-- Label como botón hamburguesa -->
+            <label for="menu-toggle" class="menu-btn">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </label>
+            <!-- Menú desplegable -->
             <nav class="nav">
                 <a href="#hero" class="nav-link">Inicio</a>
                 <a href="#terminal-sim" class="nav-link">Terminal</a>
@@ -21,6 +30,7 @@
                 <a href="#infraestructura" class="nav-link">Defensa</a>
                 <a href="#planes" class="nav-link">Planes</a>
                 <a href="#metricas" class="nav-link">Métricas</a>
+                <a href="#soc" class="nav-link">SOC</a>
                 <a href="#herramientas" class="nav-link">Herramientas</a>
                 <a href="#mexico" class="nav-link">Contexto MX</a>
                 <a href="#importancia" class="nav-link">Importancia</a>
@@ -277,6 +287,112 @@
                 </div>
             </div>
         </section>
+
+        <!-- SECCIÓN CENTRO DE COMANDO SOC (CSS GRID AVANZADO + MEDIA QUERIES) -->
+        <section id="soc" class="soc-section">
+            <h2 class="section-title">Centro de Comando <span class="neon-text">SOC</span></h2>
+            <p class="section-desc">Panel operativo del Security Operations Center. Layout asimétrico tipo Bento Box con CSS Grid.</p>
+
+            <!-- Contenedor principal con display: grid y grid-template-areas -->
+            <div class="soc-grid">
+
+                <!-- Panel 1: Mapa de Calor (ocupa 2 columnas y 2 filas) -->
+                <div class="soc-panel panel-heatmap fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="panel-header">
+                        <span class="panel-dot dot-red"></span>
+                        <h3 class="panel-title">Mapa de Calor de Amenazas</h3>
+                    </div>
+                    <div class="heatmap-visual">
+                        <div class="heatmap-row">
+                            <span class="hm-cell c-low"></span><span class="hm-cell c-mid"></span><span class="hm-cell c-high"></span><span class="hm-cell c-mid"></span><span class="hm-cell c-low"></span><span class="hm-cell c-low"></span>
+                        </div>
+                        <div class="heatmap-row">
+                            <span class="hm-cell c-mid"></span><span class="hm-cell c-crit"></span><span class="hm-cell c-high"></span><span class="hm-cell c-crit"></span><span class="hm-cell c-mid"></span><span class="hm-cell c-low"></span>
+                        </div>
+                        <div class="heatmap-row">
+                            <span class="hm-cell c-low"></span><span class="hm-cell c-high"></span><span class="hm-cell c-crit"></span><span class="hm-cell c-high"></span><span class="hm-cell c-high"></span><span class="hm-cell c-mid"></span>
+                        </div>
+                        <div class="heatmap-row">
+                            <span class="hm-cell c-mid"></span><span class="hm-cell c-mid"></span><span class="hm-cell c-high"></span><span class="hm-cell c-mid"></span><span class="hm-cell c-low"></span><span class="hm-cell c-low"></span>
+                        </div>
+                    </div>
+                    <p class="panel-footer-text">Regiones: NA · EU · ASIA · LATAM · AF · OCE</p>
+                </div>
+
+                <!-- Panel 2: Tráfico de Red (ocupa 2 columnas) -->
+                <div class="soc-panel panel-traffic fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="panel-header">
+                        <span class="panel-dot dot-cyan"></span>
+                        <h3 class="panel-title">Tráfico de Red en Vivo</h3>
+                    </div>
+                    <div class="traffic-bars">
+                        <div class="traffic-row"><span class="traffic-label">HTTPS</span><div class="traffic-bar"><div class="traffic-fill fill-cyan" style="width: 85%;"></div></div><span class="traffic-pct">85%</span></div>
+                        <div class="traffic-row"><span class="traffic-label">SSH</span><div class="traffic-bar"><div class="traffic-fill fill-green" style="width: 42%;"></div></div><span class="traffic-pct">42%</span></div>
+                        <div class="traffic-row"><span class="traffic-label">DNS</span><div class="traffic-bar"><div class="traffic-fill fill-purple" style="width: 67%;"></div></div><span class="traffic-pct">67%</span></div>
+                        <div class="traffic-row"><span class="traffic-label">FTP</span><div class="traffic-bar"><div class="traffic-fill fill-red" style="width: 12%;"></div></div><span class="traffic-pct">12%</span></div>
+                    </div>
+                </div>
+
+                <!-- Panel 3: Alertas Críticas -->
+                <div class="soc-panel panel-alerts fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="panel-header">
+                        <span class="panel-dot dot-red blink"></span>
+                        <h3 class="panel-title">Alertas Críticas</h3>
+                    </div>
+                    <ul class="alert-list">
+                        <li class="alert-item alert-critical"><span class="alert-tag">CRIT</span> Brute Force detectado en 10.0.0.4</li>
+                        <li class="alert-item alert-warning"><span class="alert-tag tag-warn">WARN</span> Certificado SSL expira en 3 días</li>
+                        <li class="alert-item alert-critical"><span class="alert-tag">CRIT</span> Exfiltración de datos en puerto 445</li>
+                        <li class="alert-item alert-info"><span class="alert-tag tag-info">INFO</span> Parche KB5034441 disponible</li>
+                    </ul>
+                </div>
+
+                <!-- Panel 4: Estado de Nodos -->
+                <div class="soc-panel panel-nodes fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="panel-header">
+                        <span class="panel-dot dot-green"></span>
+                        <h3 class="panel-title">Estado de Nodos</h3>
+                    </div>
+                    <div class="nodes-grid">
+                        <div class="node online"><span class="node-dot"></span> SRV-01</div>
+                        <div class="node online"><span class="node-dot"></span> SRV-02</div>
+                        <div class="node warning"><span class="node-dot"></span> SRV-03</div>
+                        <div class="node online"><span class="node-dot"></span> DB-01</div>
+                        <div class="node offline"><span class="node-dot"></span> FW-02</div>
+                        <div class="node online"><span class="node-dot"></span> API-GW</div>
+                    </div>
+                </div>
+
+                <!-- Panel 5: Sistema Operativo (pequeño) -->
+                <div class="soc-panel panel-os fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="panel-header">
+                        <span class="panel-dot dot-purple"></span>
+                        <h3 class="panel-title">SO Detectados</h3>
+                    </div>
+                    <div class="os-list">
+                        <div class="os-item"><span class="os-name">Linux</span><span class="os-pct neon-text">64%</span></div>
+                        <div class="os-item"><span class="os-name">Windows</span><span class="os-pct neon-cyan">28%</span></div>
+                        <div class="os-item"><span class="os-name">macOS</span><span class="os-pct neon-purple">8%</span></div>
+                    </div>
+                </div>
+
+                <!-- Panel 6: Firewall Log -->
+                <div class="soc-panel panel-firewall fade-in-up" style="animation-delay: 0.6s;">
+                    <div class="panel-header">
+                        <span class="panel-dot dot-green"></span>
+                        <h3 class="panel-title">Firewall Log</h3>
+                    </div>
+                    <div class="fw-log">
+                        <p class="fw-line"><span class="fw-time">21:01:12</span> <span class="fw-allow">ALLOW</span> 192.168.1.50 → 443</p>
+                        <p class="fw-line"><span class="fw-time">21:01:09</span> <span class="fw-deny">DENY</span> 45.33.32.156 → 22</p>
+                        <p class="fw-line"><span class="fw-time">21:01:05</span> <span class="fw-allow">ALLOW</span> 10.0.0.12 → 80</p>
+                        <p class="fw-line"><span class="fw-time">21:00:58</span> <span class="fw-deny">DENY</span> 91.189.92.20 → 3389</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- BOTÓN FLOTANTE DE EMERGENCIA (POSITION: FIXED) -->

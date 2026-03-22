@@ -16,6 +16,7 @@
             <a href="#" class="logo">Cyber<span class="neon-text">Shield</span></a>
             <nav class="nav">
                 <a href="#hero" class="nav-link">Inicio</a>
+                <a href="#terminal-sim" class="nav-link">Terminal</a>
                 <a href="#servicios" class="nav-link">Servicios</a>
                 <a href="#herramientas" class="nav-link">Herramientas</a>
                 <a href="#mexico" class="nav-link">Contexto MX</a>
@@ -33,6 +34,38 @@
                 <a href="#servicios" class="btn btn-glow">Explorar Más</a>
             </div>
             <div class="hero-bg-glow"></div>
+        </section>
+
+        <!-- SECCIÓN SIMULADOR DE TERMINAL -->
+        <section id="terminal-sim" class="terminal-section">
+            <h2 class="section-title">Diagnóstico de <span class="neon-text">Red</span></h2>
+            <p class="section-desc">Interceptación de paquetes y escaneo de vulnerabilidades en tiempo real.</p>
+            <div class="terminal-window fade-in-up">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="t-btn close"></span>
+                        <span class="t-btn minimize"></span>
+                        <span class="t-btn maximize"></span>
+                    </div>
+                    <div class="terminal-title">root@cybershield: ~</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="cmd-line line-1"><span class="prompt">root@cybershield:~#</span> nmap -sS -O 192.168.1.1</div>
+                    <div class="cmd-line line-2">Starting Nmap 7.92 ( https://nmap.org ) at 2026-03-21 20:15</div>
+                    <div class="cmd-line line-3">Nmap scan report for 192.168.1.1</div>
+                    <div class="cmd-line line-4">Host is up (0.0012s latency).</div>
+                    <div class="cmd-line line-5">Not shown: 996 closed tcp ports (reset)</div>
+                    <div class="cmd-line line-6">PORT     STATE SERVICE</div>
+                    <div class="cmd-line line-7">22/tcp   open  ssh</div>
+                    <div class="cmd-line line-8">80/tcp   open  http</div>
+                    <div class="cmd-line line-9">443/tcp  open  https</div>
+                    <div class="cmd-line line-10">445/tcp  open  microsoft-ds</div>
+                    <div class="cmd-line line-11">Device type: general purpose</div>
+                    <div class="cmd-line line-12">Running: Linux 4.X|5.X</div>
+                    <div class="cmd-line line-13"><span class="neon-text">[+]</span> SCAN COMPLETED. 1 IP address (1 host up) scanned in 2.34 seconds.</div>
+                    <div class="cmd-line line-14"><span class="prompt">root@cybershield:~#</span> <span class="cursor blink">_</span></div>
+                </div>
+            </div>
         </section>
 
         <section id="servicios" class="services">

@@ -276,6 +276,112 @@ a {
     animation: none; /* Pausa el latido al hacer hover */
 }
 
+/* 2.5 Terminal Simulator */
+.terminal-section {
+    padding: 6rem 2rem 2rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.terminal-window {
+    background-color: #0d0d0d;
+    border: 1px solid rgba(0, 255, 102, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 20px rgba(0,255,102,0.1);
+    font-family: var(--font-mono);
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.terminal-header {
+    background-color: #1a1a1a;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    position: relative;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.t-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.t-btn.close { background-color: #ff5f56; }
+.t-btn.minimize { background-color: #ffbd2e; }
+.t-btn.maximize { background-color: #27c93f; }
+
+.terminal-title {
+    color: #888;
+    font-size: 0.85rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    height: 350px;
+    overflow-y: auto;
+}
+
+.prompt {
+    color: #ff0055;
+    margin-right: 10px;
+}
+
+.cmd-line {
+    opacity: 0;
+    margin-bottom: 0.4rem;
+    animation: showLine 0s forwards;
+}
+
+/* Animaciones secuenciales de la terminal */
+.line-1 {
+    opacity: 1; /* Para la animación de tipeo */
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid transparent;
+    max-width: 0;
+    animation: typing 1.5s steps(40, end) forwards;
+}
+.line-2 { animation-delay: 2.0s; }
+.line-3 { animation-delay: 2.8s; color: var(--cyan); }
+.line-4 { animation-delay: 3.0s; }
+.line-5 { animation-delay: 3.2s; }
+.line-6 { animation-delay: 3.6s; color: #fff; font-weight: bold; }
+.line-7 { animation-delay: 3.7s; }
+.line-8 { animation-delay: 3.8s; }
+.line-9 { animation-delay: 3.9s; }
+.line-10 { animation-delay: 4.0s; }
+.line-11 { animation-delay: 4.5s; color: var(--cyan); }
+.line-12 { animation-delay: 4.6s; }
+.line-13 { animation-delay: 5.5s; color: var(--neon-green); font-weight: bold; }
+.line-14 { animation-delay: 6s; }
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+}
+
+@keyframes showLine {
+    to { opacity: 1; }
+}
+
+@keyframes typing {
+    from { max-width: 0; }
+    to { max-width: 100%; border-right-color: transparent; }
+}
+
 /* Secciones Generales */
 .section-title {
     text-align: center;

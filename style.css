@@ -38,6 +38,7 @@ body {
     font-family: var(--font-sans);
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative; /* Contexto base para elementos absolutos en el documento */
 }
 
 h1, h2, h3 {
@@ -945,6 +946,93 @@ a {
     margin-top: 1rem;
     color: var(--cyan);
     opacity: 0.7;
+}
+
+/* 9. Botón Flotante de Emergencia (Position Explicit) */
+.floating-button {
+    /* POSITION FIXED: Se ancla a la ventana (viewport), no al documento. 
+       Se mantiene siempre en pantalla sin importar el scroll. */
+    position: fixed;
+    bottom: 20px;
+    right: 20px; 
+    
+    /* POSITION RELATIVE: Contexto para que el tooltip interno sea posicionado respecto a este botón */
+    position: relative;
+    
+    width: 65px;
+    height: 65px;
+    background-color: var(--bg-dark);
+    border: 2px solid #ff0055;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 9999; 
+    
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.4), inset 0 0 10px rgba(255, 0, 85, 0.2);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.floating-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 0, 85, 0.6), inset 0 0 15px rgba(255, 0, 85, 0.4);
+    animation: pulseGlowRed 1.5s infinite;
+}
+
+.floating-button .icon {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 5px rgba(255, 0, 85, 0.8));
+    display: flex;
+}
+
+.tooltip {
+    /* POSITION ABSOLUTE: El tooltip viaja y se ancla a la izquierda de su contenedor,
+       puesto que ahora el botón otra vez está a la orilla derecha de la pantalla. */
+    position: absolute;
+    right: 75px; /* Se desplaza 75px a la izquierda desde el borde derecho del botón */
+    bottom: 50%; 
+    transform: translateY(50%); 
+    
+    background-color: #ff0055;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap; 
+    
+    /* Estado inicial: oculto */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Flecha decorativa del tooltip */
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -6px; /* La flecha apunta a la derecha hacia el botón */
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px; 
+    border-style: solid;
+    border-color: transparent transparent transparent #ff0055; /* Apunta a la derecha */
+}
+
+/* Evento Hover: Aparece dinámicamente */
+.floating-button:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    right: 85px; /* Pequeño salto a la izquierda al aparecer */
+}
+
+@keyframes pulseGlowRed {
+    0% { box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); }
+    50% { box-shadow: 0 0 40px rgba(255, 0, 85, 0.8), 0 0 10px #ff0055; }
+    100% { box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); }
 }
 
 /* Diseño Responsivo */

@@ -1,12 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield | Seguridad Ofensiva y Defensiva</title>
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <!-- Google Fonts para darle estilo hacker / tech -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">Cyber<span class="neon-text">Shield</span></a>
+            <nav class="nav">
+                <a href="#hero" class="nav-link">Inicio</a>
+                <a href="#servicios" class="nav-link">Servicios</a>
+                <a href="#herramientas" class="nav-link">Herramientas</a>
+                <a href="#mexico" class="nav-link">Contexto MX</a>
+                <a href="#importancia" class="nav-link">Importancia</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero fade-in-up">
+            <div class="hero-content">
+                <div class="terminal-badge"><span class="blink">></span> root@system:~# status --secure</div>
+                <h1 class="hero-title">Protegemos tu <br><span class="neon-text">Infraestructura Crítica</span></h1>
+                <p class="hero-subtitle">Defensa activa, monitoreo continuo y ethical hacking para salvaguardar el activo más importante de tu empresa: la información.</p>
+                <a href="#servicios" class="btn btn-glow">Explorar Más</a>
+            </div>
+            <div class="hero-bg-glow"></div>
+        </section>
+
+        <section id="servicios" class="services">
+            <h2 class="section-title">Nuestros <span class="neon-text">Servicios</span></h2>
+            <div class="services-grid">
+                <div class="card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="card-icon">🥷</div>
+                    <h3 class="card-title">Pentesting</h3>
+                    <p class="card-desc">Evaluamos la seguridad de tus sistemas simulando ataques cibernéticos reales para identificar y mitigar vulnerabilidades críticas de red.</p>
+                </div>
+                <div class="card fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="card-icon">🔐</div>
+                    <h3 class="card-title">Criptografía</h3>
+                    <p class="card-desc">Implementamos protocolos de cifrado de extremo a extremo y arquitecturas Zero Trust para garantizar la confidencialidad de datos.</p>
+                </div>
+                <div class="card fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="card-icon">👁️</div>
+                    <h3 class="card-title">Monitoreo 24/7</h3>
+                    <p class="card-desc">Nuestro Centro de Operaciones de Seguridad (SOC) vigila tu red de forma ininterrumpida para detectar amenazas en tiempo real.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE HERRAMIENTAS Y SISTEMAS -->
+        <section id="herramientas" class="tools-section">
+            <h2 class="section-title">Software y <span class="neon-text">Sistemas Clave</span></h2>
+            <p class="section-desc">En el ámbito del Ethical Hacking y la defensa cibernética, dominar este ecosistema de herramientas es vital para auditorías y mitigación de riesgos.</p>
+            <div class="tools-grid">
+                <div class="tool-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="tool-icon">🐧</div>
+                    <h3 class="tool-title">Kali Linux</h3>
+                    <p class="tool-desc">Distribución líder en la industria para pruebas de penetración y auditorías de seguridad informática. Incluye cientos de herramientas preinstaladas.</p>
+                </div>
+                <div class="tool-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="tool-icon">👁️‍🗨️</div>
+                    <h3 class="tool-title">Nmap</h3>
+                    <p class="tool-desc">Network Mapper es la herramienta estándar (Open Source) para exploración de red, escaneo de puertos y descubrimiento de servicios / vulnerabilidades.</p>
+                </div>
+                <div class="tool-card fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="tool-icon">🦈</div>
+                    <h3 class="tool-title">Wireshark</h3>
+                    <p class="tool-desc">Analizador de protocolos de red que permite capturar datos en tiempo real y observar el tráfico que circula a través de la interfaz de red.</p>
+                </div>
+                <div class="tool-card fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="tool-icon">🛡️</div>
+                    <h3 class="tool-title">Metasploit</h3>
+                    <p class="tool-desc">Framework de código abierto que proporciona información para encontrar vulnerabilidades y desarrollar exploits de manera controlada.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CONTEXTO MÉXICO -->
+        <section id="mexico" class="info-section">
+            <div class="info-container fade-in-up">
+                <h2 class="section-title text-left">Pandemia Digital en <span class="neon-cyan">México</span></h2>
+                <div class="info-layout">
+                    <div class="info-text">
+                        <p>México es actualmente uno de los países que recibe la mayor cantidad de ciberataques en toda América Latina. Instituciones gubernamentales, bancos y millones de Pymes enfrentan Amenazas Persistentes Avanzadas (APT).</p>
+                        <p>Los incidentes de secuestro de datos (ransomware), donde los atacantes cifran la información a cambio de un rescate económico, y el phishing han escalado de manera alarmante, demostrando la necesidad crítica de fortalecer la infraestructura defensiva local.</p>
+                        <div class="stats-box">
+                            <div class="stat"><span class="stat-number neon-cyan">+80%</span><span class="stat-label">Aumento en ataques</span></div>
+                            <div class="stat"><span class="stat-number neon-cyan">Top 3</span><span class="stat-label">País objetivo en LatAm</span></div>
+                        </div>
+                    </div>
+                    <div class="info-visual map-visual">
+                        <div class="radar-scan"></div>
+                        <div class="mx-map-text">MX_DATA_BREACH DETECTED...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN IMPORTANCIA -->
+        <section id="importancia" class="info-section alternate-bg">
+            <div class="info-container fade-in-up">
+                <h2 class="section-title text-left">¿Por qué te debe <span class="neon-purple">Importar?</span></h2>
+                <div class="info-layout reverse">
+                    <div class="info-text">
+                        <p>La ciberseguridad no es un tema exclusivo de informáticos corporativos. Cada día compartes datos financieros, ubicaciones en tiempo real, contraseñas y comunicaciones personales desde tus dispositivos.</p>
+                        <ul class="custom-list">
+                            <li><span class="list-bullet">></span> <strong>Robo de Identidad:</strong> Tus datos pueden usarse para abrir cuentas de crédito o cometer fraudes digitales a tu nombre.</li>
+                            <li><span class="list-bullet">></span> <strong>Secuestro de Cuentas:</strong> Pérdida de redes sociales o correos que sirven como puerta de acceso a contactos más vulnerables.</li>
+                            <li><span class="list-bullet">></span> <strong>Privacidad Violada:</strong> Exposición de fotos o archivos privados por no utilizar autenticación de múltiples factores o contraseñas sólidas.</li>
+                        </ul>
+                        <p>La seguridad es una cultura, no un producto. Tu comportamiento en la red es la primera y última línea de defensa.</p>
+                    </div>
+                    <div class="info-visual shield-visual">
+                        <div class="shield-icon">🛡️</div>
+                        <div class="shield-aura"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contacto" class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 CyberShield. Todos los derechos reservados.</p>
+            <p class="author-credits">Desarrollado por <span class="neon-text">Guillermo Antonio López Lemus</span></p>
+            <p class="terminal-footer">root@cybershield:~# exit <span class="blink">_</span></p>
+        </div>
+    </footer>
 </body>
 </html>
